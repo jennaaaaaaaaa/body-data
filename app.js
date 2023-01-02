@@ -1,12 +1,14 @@
 const express = require("express")
 
 const app = express()
-
-app.use(express.json())
 const port = 1000
 
+app.use(express.json())
+
 app.get('/querystring', (req, res) => {
+
     const id = req.query.id
+    // console.log(id)
     res.send(id)
 })
 
@@ -21,7 +23,12 @@ app.post('/body-multipart', (req, res) => {
 app.post('/body-json', (req, res) => {
     const { id } = req.body
 
-    res.send(id)
+    res.send({id})
+
+    // // 객체구조분해할당으로 여러가지 데이터를 한 문장으로 작성하여 받아올 수 있음
+    // // body에서 {"id":"value","password":"value"} 형식으로 데이터를 보냄
+    // const {id, password} = req.body
+    // res.json({id,password})
 })
 
 app.listen(port, () => {
